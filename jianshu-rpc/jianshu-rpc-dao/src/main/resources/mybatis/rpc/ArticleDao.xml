@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhaoyubo.jianshu.rpc.dao.ArticleDao">
+  <resultMap id="BaseResultMap" type="com.zhaoyubo.jianshu.rpc.domain.ArticleDomain">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
+    <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
+    <result column="last_operator" jdbcType="BIGINT" property="lastOperator" />
+    <result column="view_count" jdbcType="INTEGER" property="viewCount" />
+    <result column="word_count" jdbcType="INTEGER" property="wordCount" />
+    <result column="heat" jdbcType="DECIMAL" property="heat" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="content_id" jdbcType="BIGINT" property="contentId" />
+    <result column="is_free" jdbcType="TINYINT" property="isFree" />
+    <result column="state" jdbcType="TINYINT" property="state" />
+    <result column="free_content_id" jdbcType="BIGINT" property="freeContentId" />
+    <result column="is_commentable" jdbcType="TINYINT" property="isCommentable" />
+    <result column="is_rewardable" jdbcType="TINYINT" property="isRewardable" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, gmt_create, gmt_modified, last_operator, view_count, word_count, heat, title, 
+    content_id, is_free, state, free_content_id, is_commentable, is_rewardable, user_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from article
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from article
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.zhaoyubo.jianshu.rpc.domain.ArticleDomain" useGeneratedKeys="true">
+    insert into article (gmt_create, gmt_modified, last_operator, 
+      view_count, word_count, heat, 
+      title, content_id, is_free, 
+      state, free_content_id, is_commentable, 
+      is_rewardable, user_id)
+    values (#{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, #{lastOperator,jdbcType=BIGINT}, 
+      #{viewCount,jdbcType=INTEGER}, #{wordCount,jdbcType=INTEGER}, #{heat,jdbcType=DECIMAL}, 
+      #{title,jdbcType=VARCHAR}, #{contentId,jdbcType=BIGINT}, #{isFree,jdbcType=TINYINT}, 
+      #{state,jdbcType=TINYINT}, #{freeContentId,jdbcType=BIGINT}, #{isCommentable,jdbcType=TINYINT}, 
+      #{isRewardable,jdbcType=TINYINT}, #{userId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.zhaoyubo.jianshu.rpc.domain.ArticleDomain" useGeneratedKeys="true">
+    insert into article
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="gmtCreate != null">
+        gmt_create,
+      </if>
+      <if test="gmtModified != null">
+        gmt_modified,
+      </if>
+      <if test="lastOperator != null">
+        last_operator,
+      </if>
+      <if test="viewCount != null">
+        view_count,
+      </if>
+      <if test="wordCount != null">
+        word_count,
+      </if>
+      <if test="heat != null">
+        heat,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="contentId != null">
+        content_id,
+      </if>
+      <if test="isFree != null">
+        is_free,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="freeContentId != null">
+        free_content_id,
+      </if>
+      <if test="isCommentable != null">
+        is_commentable,
+      </if>
+      <if test="isRewardable != null">
+        is_rewardable,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="gmtCreate != null">
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null">
+        #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastOperator != null">
+        #{lastOperator,jdbcType=BIGINT},
+      </if>
+      <if test="viewCount != null">
+        #{viewCount,jdbcType=INTEGER},
+      </if>
+      <if test="wordCount != null">
+        #{wordCount,jdbcType=INTEGER},
+      </if>
+      <if test="heat != null">
+        #{heat,jdbcType=DECIMAL},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="contentId != null">
+        #{contentId,jdbcType=BIGINT},
+      </if>
+      <if test="isFree != null">
+        #{isFree,jdbcType=TINYINT},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=TINYINT},
+      </if>
+      <if test="freeContentId != null">
+        #{freeContentId,jdbcType=BIGINT},
+      </if>
+      <if test="isCommentable != null">
+        #{isCommentable,jdbcType=TINYINT},
+      </if>
+      <if test="isRewardable != null">
+        #{isRewardable,jdbcType=TINYINT},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhaoyubo.jianshu.rpc.domain.ArticleDomain">
+    update article
+    <set>
+      <if test="gmtCreate != null">
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null">
+        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastOperator != null">
+        last_operator = #{lastOperator,jdbcType=BIGINT},
+      </if>
+      <if test="viewCount != null">
+        view_count = #{viewCount,jdbcType=INTEGER},
+      </if>
+      <if test="wordCount != null">
+        word_count = #{wordCount,jdbcType=INTEGER},
+      </if>
+      <if test="heat != null">
+        heat = #{heat,jdbcType=DECIMAL},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="contentId != null">
+        content_id = #{contentId,jdbcType=BIGINT},
+      </if>
+      <if test="isFree != null">
+        is_free = #{isFree,jdbcType=TINYINT},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=TINYINT},
+      </if>
+      <if test="freeContentId != null">
+        free_content_id = #{freeContentId,jdbcType=BIGINT},
+      </if>
+      <if test="isCommentable != null">
+        is_commentable = #{isCommentable,jdbcType=TINYINT},
+      </if>
+      <if test="isRewardable != null">
+        is_rewardable = #{isRewardable,jdbcType=TINYINT},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhaoyubo.jianshu.rpc.domain.ArticleDomain">
+    update article
+    set gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      last_operator = #{lastOperator,jdbcType=BIGINT},
+      view_count = #{viewCount,jdbcType=INTEGER},
+      word_count = #{wordCount,jdbcType=INTEGER},
+      heat = #{heat,jdbcType=DECIMAL},
+      title = #{title,jdbcType=VARCHAR},
+      content_id = #{contentId,jdbcType=BIGINT},
+      is_free = #{isFree,jdbcType=TINYINT},
+      state = #{state,jdbcType=TINYINT},
+      free_content_id = #{freeContentId,jdbcType=BIGINT},
+      is_commentable = #{isCommentable,jdbcType=TINYINT},
+      is_rewardable = #{isRewardable,jdbcType=TINYINT},
+      user_id = #{userId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,26 @@
+# mac
+.DS_Store
+
+# windows
+Desktop.ini
+Thumbs.db
+
+# maven
+target/
+
+# eclipse
+.settings/
+.project
+.classpath
+.springBeans
+
+# logs
+*.log
+logs
+
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr

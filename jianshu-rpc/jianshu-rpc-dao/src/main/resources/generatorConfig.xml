@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+
+    <context id="default" targetRuntime="MyBatis3">
+
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
+
+        <commentGenerator>
+            <property name="suppressDate" value="true"/>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+
+        <!-- dev -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://127.0.0.1/jianshu?useUnicode=true&amp;characterEncoding=UTF-8&amp;useSSL=false"
+                        userId="root"
+                        password="root">
+        </jdbcConnection>
+
+        <!-- 由于是多模块工程，先用 mybatis 生成文件后放在 dao 模块的 pre 包中，之后再用脚本 mv 到其他模块的包中 -->
+        <javaModelGenerator targetPackage="com.zhaoyubo.jianshu.rpc.domain"
+                            targetProject="pre/main/java">
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <sqlMapGenerator targetPackage="mapper" targetProject="pre/main/resources"/>
+
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.zhaoyubo.jianshu.rpc.dao"
+                             targetProject="pre/main/java"/>
+
+
+        <table tableName="article" domainObjectName="ArticleDomain" mapperName="ArticleDao"
+               enableCountByExample="false" enableSelectByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false">
+            <generatedKey column="id" sqlStatement="JDBC"/>
+        </table>
+        <table tableName="comment" domainObjectName="CommentDomain" mapperName="CommentDao"
+               enableCountByExample="false" enableSelectByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false">
+            <generatedKey column="id" sqlStatement="JDBC"/>
+        </table>
+        <table tableName="notebook" domainObjectName="NoteBookDomain" mapperName="NoteBookDao"
+               enableCountByExample="false" enableSelectByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false">
+            <generatedKey column="id" sqlStatement="JDBC"/>
+        </table>
+        <table tableName="notification" domainObjectName="NotificationDomain" mapperName="NotificationDao"
+               enableCountByExample="false" enableSelectByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false">
+            <generatedKey column="id" sqlStatement="JDBC"/>
+        </table>
+        <table tableName="timeline" domainObjectName="TimelineDomain" mapperName="TimelineDao"
+               enableCountByExample="false" enableSelectByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false">
+            <generatedKey column="id" sqlStatement="JDBC"/>
+        </table>
+        <table tableName="user" domainObjectName="UserDomain" mapperName="UserDao"
+               enableCountByExample="false" enableSelectByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false">
+            <generatedKey column="id" sqlStatement="JDBC"/>
+        </table>
+
+
+    </context>
+
+</generatorConfiguration>

@@ -1,0 +1,15 @@
+project:
+  base-package: com.zhaoyubo.jianshu
+  ver: 1.0.0
+  env: @_project.env@
+  project: jianshu-rpc-server
+mybatis:
+  mapper-locations: classpath:mybatis/rpc/*
+server:
+  port: 18080
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: @_spring.datasource.url@
+    username: @_spring.datasource.username@
+    password: @_spring.datasource.password@

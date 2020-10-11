@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.0.1.RELEASE</version>
+    </parent>
+
+    <groupId>com.zhaoyubo.jianshu</groupId>
+    <artifactId>jianshu-rpc</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0.0-SNAPSHOT</version>
+    <modules>
+        <module>jianshu-rpc-common</module>
+        <module>jianshu-rpc-domain</module>
+        <module>jianshu-rpc-dao</module>
+        <module>jianshu-rpc-service</module>
+        <module>jianshu-rpc-server</module>
+    </modules>
+
+    <properties>
+        <!-- 工程本身 -->
+        <project.version>1.0.0-SNAPSHOT</project.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.zhaoyubo.jianshu</groupId>
+                <artifactId>jianshu-rpc-domain</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.zhaoyubo.jianshu</groupId>
+                <artifactId>jianshu-rpc-common</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.zhaoyubo.jianshu</groupId>
+                <artifactId>jianshu-rpc-dao</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.zhaoyubo.jianshu</groupId>
+                <artifactId>jianshu-rpc-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.zhaoyubo.jianshu</groupId>
+                <artifactId>jianshu-common-lib-dependencies</artifactId>
+                <version>1.0.0-SNAPSHOT</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+<build>
+    <plugins>
+        <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>versions-maven-plugin</artifactId>
+            <version>2.3</version>
+            <configuration>
+                <generateBackupPoms>yes</generateBackupPoms>
+            </configuration>
+        </plugin>
+    </plugins>
+</build>
+</project>
