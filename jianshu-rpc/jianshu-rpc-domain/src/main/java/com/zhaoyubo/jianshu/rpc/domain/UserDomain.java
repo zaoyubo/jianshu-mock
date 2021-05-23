@@ -5,7 +5,7 @@ import java.util.Date;
 public class UserDomain {
     private Long id;
 
-    private Integer phone;
+    private Long phone;
 
     private String password;
 
@@ -13,7 +13,7 @@ public class UserDomain {
 
     private String avatarUrl;
 
-    private Integer qq;
+    private Long qq;
 
     private String weibo;
 
@@ -35,11 +35,11 @@ public class UserDomain {
         this.id = id;
     }
 
-    public Integer getPhone() {
+    public Long getPhone() {
         return phone;
     }
 
-    public void setPhone(Integer phone) {
+    public void setPhone(Long phone) {
         this.phone = phone;
     }
 
@@ -67,11 +67,11 @@ public class UserDomain {
         this.avatarUrl = avatarUrl == null ? null : avatarUrl.trim();
     }
 
-    public Integer getQq() {
+    public Long getQq() {
         return qq;
     }
 
-    public void setQq(Integer qq) {
+    public void setQq(Long qq) {
         this.qq = qq;
     }
 

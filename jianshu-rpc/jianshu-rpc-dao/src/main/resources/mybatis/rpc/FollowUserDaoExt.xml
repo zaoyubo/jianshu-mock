@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhaoyubo.jianshu.rpc.dao.FollowUserDao">
+    <select id="findFolloweeByUserId" resultType="java.lang.Long">
+        select
+        followee_id
+        from follow_user
+        where follower_id = #{userId,jdbcType=BIGINT}
+        order by gmt_create desc
+        limit #{offset,jdbcType=INTEGER},#{limit,jdbcType=INTEGER}
+    </select>
+    <select id="countFolloweeByUserId" parameterType="java.lang.Long" resultType="java.lang.Integer">
+        select
+        count(*)
+        from follow_user
+        where follower_id = #{userId,jdbcType=BIGINT}
+    </select>
+    <select id="findFollowerByUserId"  resultType="java.lang.Long">
+        select
+        follower_id
+        from follow_user
+        where followee_id = #{userId,jdbcType=BIGINT}
+        order by gmt_create desc
+        limit #{offset,jdbcType=INTEGER},#{limit,jdbcType=INTEGER}
+    </select>
+    <select id="countFollowerByUserId" parameterType="java.lang.Long" resultType="java.lang.Integer">
+        select
+        count(*)
+        from follow_user
+        where followee_id = #{userId,jdbcType=BIGINT}
+    </select>
+
+</mapper>

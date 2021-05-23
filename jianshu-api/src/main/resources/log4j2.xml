@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration status="warn">
+
+    <Properties>
+        <Property name="logdir">@_log4j.path@</Property>
+        <Property name="ROOT_PATTERN">%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %level [%C{36}.%M:%L] - %msg%xEx%n</Property>
+        <Property name="NAME_PATTERN">%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %level [%C.%M:%L] - %msg%xEx%n</Property>
+    </Properties>
+
+    <appenders>
+
+        <Console name="consoleAppender" target="SYSTEM_OUT">
+            <PatternLayout pattern="${NAME_PATTERN}"/>
+        </Console>
+
+<!--        <RollingRandomAccessFile name="mybatisAppender"-->
+<!--                                 fileName="${logdir}/mybatis.log"-->
+<!--                                 filePattern="${logdir}/mybatis.log.%d{yyyy-MM-dd-HH}.gz">-->
+<!--            <PatternLayout pattern="${ROOT_PATTERN}"/>-->
+<!--            <Policies>-->
+<!--                <TimeBasedTriggeringPolicy />-->
+<!--            </Policies>-->
+<!--        </RollingRandomAccessFile>-->
+
+        <RollingRandomAccessFile name="rootAppender"
+                                 fileName="${logdir}/root.log"
+                                 filePattern="${logdir}/root.log.%d{yyyy-MM-dd}.gz">
+            <PatternLayout pattern="${ROOT_PATTERN}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+            <ThresholdFilter level="INFO"/>
+        </RollingRandomAccessFile>
+
+        <RollingRandomAccessFile name="serviceAppender"
+                                 fileName="${logdir}/service.log"
+                                 filePattern="${logdir}/service.log.%d{yyyy-MM-dd-HH}.gz">
+            <PatternLayout pattern="${NAME_PATTERN}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+        </RollingRandomAccessFile>
+
+        <RollingRandomAccessFile name="errorAppender"
+                                 fileName="${logdir}/error.log"
+                                 filePattern="${logdir}/error.log.%d{yyyy-MM-dd-HH}.gz">
+            <PatternLayout pattern="${NAME_PATTERN}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+        </RollingRandomAccessFile>
+
+    </appenders>
+
+    <loggers>
+
+        <!-- root，最后没主的都打到这里来 -->
+        <root level="info">
+            <appender-ref ref="rootAppender"/>
+            <appender-ref ref="consoleAppender" />
+        </root>
+
+<!--        &lt;!&ndash; mybatis，线下debug，线上error &ndash;&gt;-->
+<!--        <logger name="com.zhaoyubo.jianshu.api.dao" additivity="false" level="@_slf4j.mybatis.level@">-->
+<!--            <appender-ref ref="mybatisAppender"/>-->
+<!--            <appender-ref ref="consoleAppender" />-->
+<!--        </logger>-->
+
+        <logger name="jianshu_service" level="debug" additivity="false" >
+            <appender-ref ref="serviceAppender" />
+            <appender-ref ref="consoleAppender" />
+        </logger>
+
+        <logger name="jianshu_error" level="debug" additivity="false" >
+            <appender-ref ref="errorAppender" />
+            <appender-ref ref="consoleAppender" />
+        </logger>
+
+    </loggers>
+</configuration>

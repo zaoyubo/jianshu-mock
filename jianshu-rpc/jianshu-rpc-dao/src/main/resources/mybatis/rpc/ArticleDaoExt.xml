@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhaoyubo.jianshu.rpc.dao.ArticleDao">
+
+    <select id="selectByUserId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from article
+        where user_id = #{userId,jdbcType=BIGINT}
+        limit #{offset,jdbcType=BIGINT},#{limit,jdbcType=BIGINT}
+    </select>
+    <select id="selectByUserIdAndHeat" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from article
+        where user_id = #{userId,jdbcType=BIGINT}
+        order by heat desc
+        limit #{offset,jdbcType=BIGINT},#{limit,jdbcType=BIGINT}
+    </select>
+    <select id="selectByUserIdAndCommentTime" resultMap="BaseResultMap">
+        select
+        article.id, article.gmt_create, article.gmt_modified, article.last_operator, view_count, word_count, heat, title,
+    content_id, is_free, article.state, free_content_id, is_commentable, is_rewardable, article.user_id
+        ,comment.gmt_create
+        from article, comment
+        where comment.article_id = article.id
+        and article.user_id = #{userId,jdbcType=BIGINT}
+        order by comment.gmt_create desc
+        limit #{offset,jdbcType=BIGINT},#{limit,jdbcType=BIGINT}
+    </select>
+    <select id="countArticleByUserId" resultType="Integer">
+        select
+            count(*)
+        from article
+        where user_id = #{userId,jdbcType=BIGINT}
+    </select>
+    <select id="countArticleWordCountsByUserId" resultType="Integer">
+        select
+            sum(word_count)
+        from article
+        where user_id = #{userId,jdbcType=BIGINT}
+    </select>
+</mapper>

@@ -13,3 +13,23 @@ spring:
     url: @_spring.datasource.url@
     username: @_spring.datasource.username@
     password: @_spring.datasource.password@
+dubbo:
+  application:
+    # 服务名称，保持唯一
+    name: server-provider
+  scan:
+    base-packages: com.zhaoyubo.jianshu.rpc.rpcServiceImpl
+  # zookeeper地址，用于向其注册服务
+  registry:
+    protocol: zookeeper
+    address: @_dubbo.registry.address@
+  #暴露服务方式
+  protocol:
+    # dubbo协议，固定写法
+    name: dubbo
+    # 暴露服务端口 （默认是20880，不同的服务提供者端口不能重复）
+    port: 20880
+  # 自定义属性：serviceImpl 版本
+  service:
+    version: 1.0.0
+

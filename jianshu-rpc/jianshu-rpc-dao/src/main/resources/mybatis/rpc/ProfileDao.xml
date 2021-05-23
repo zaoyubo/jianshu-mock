@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhaoyubo.jianshu.rpc.dao.ProfileDao">
+  <resultMap id="BaseResultMap" type="com.zhaoyubo.jianshu.rpc.domain.ProfileDomain">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="gender" jdbcType="TINYINT" property="gender" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="
+personal_website" jdbcType="VARCHAR" property="
+personalWebsite" />
+    <result column="weixin_qrcode_url" jdbcType="VARCHAR" property="weixinQrcodeUrl" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, gender, description, 
+personal_website, weixin_qrcode_url, user_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from profile
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from profile
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.zhaoyubo.jianshu.rpc.domain.ProfileDomain" useGeneratedKeys="true">
+    insert into profile (gender, description, 
+personal_website, 
+      weixin_qrcode_url, user_id)
+    values (#{gender,jdbcType=TINYINT}, #{description,jdbcType=VARCHAR}, #{
+personalWebsite,jdbcType=VARCHAR}, 
+      #{weixinQrcodeUrl,jdbcType=VARCHAR}, #{userId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.zhaoyubo.jianshu.rpc.domain.ProfileDomain" useGeneratedKeys="true">
+    insert into profile
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="gender != null">
+        gender,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="
+personalWebsite != null">
+        
+personal_website,
+      </if>
+      <if test="weixinQrcodeUrl != null">
+        weixin_qrcode_url,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="gender != null">
+        #{gender,jdbcType=TINYINT},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="
+personalWebsite != null">
+        #{
+personalWebsite,jdbcType=VARCHAR},
+      </if>
+      <if test="weixinQrcodeUrl != null">
+        #{weixinQrcodeUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhaoyubo.jianshu.rpc.domain.ProfileDomain">
+    update profile
+    <set>
+      <if test="gender != null">
+        gender = #{gender,jdbcType=TINYINT},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="
+personalWebsite != null">
+        
+personal_website = #{
+personalWebsite,jdbcType=VARCHAR},
+      </if>
+      <if test="weixinQrcodeUrl != null">
+        weixin_qrcode_url = #{weixinQrcodeUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhaoyubo.jianshu.rpc.domain.ProfileDomain">
+    update profile
+    set gender = #{gender,jdbcType=TINYINT},
+      description = #{description,jdbcType=VARCHAR},
+      
+personal_website = #{
+personalWebsite,jdbcType=VARCHAR},
+      weixin_qrcode_url = #{weixinQrcodeUrl,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -25,6 +25,7 @@
     <properties>
         <!-- 工程本身 -->
         <project.version>1.0.0-SNAPSHOT</project.version>
+
     </properties>
 
     <dependencyManagement>
@@ -66,7 +67,7 @@
             <artifactId>versions-maven-plugin</artifactId>
             <version>2.3</version>
             <configuration>
-                <generateBackupPoms>yes</generateBackupPoms>
+                <generateBackupPoms>true</generateBackupPoms>
             </configuration>
         </plugin>
     </plugins>

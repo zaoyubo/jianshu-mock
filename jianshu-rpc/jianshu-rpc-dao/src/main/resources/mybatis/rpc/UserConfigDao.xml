@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhaoyubo.jianshu.rpc.dao.UserConfigDao">
+  <resultMap id="BaseResultMap" type="com.zhaoyubo.jianshu.rpc.domain.UserConfigDomain">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="editor_type" jdbcType="TINYINT" property="editorType" />
+    <result column="language" jdbcType="TINYINT" property="language" />
+    <result column="messge_type" jdbcType="TINYINT" property="messgeType" />
+    <result column="notification_type" jdbcType="TINYINT" property="notificationType" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, editor_type, language, messge_type, notification_type, user_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user_config
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from user_config
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.zhaoyubo.jianshu.rpc.domain.UserConfigDomain" useGeneratedKeys="true">
+    insert into user_config (editor_type, language, messge_type, 
+      notification_type, user_id)
+    values (#{editorType,jdbcType=TINYINT}, #{language,jdbcType=TINYINT}, #{messgeType,jdbcType=TINYINT}, 
+      #{notificationType,jdbcType=TINYINT}, #{userId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.zhaoyubo.jianshu.rpc.domain.UserConfigDomain" useGeneratedKeys="true">
+    insert into user_config
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="editorType != null">
+        editor_type,
+      </if>
+      <if test="language != null">
+        language,
+      </if>
+      <if test="messgeType != null">
+        messge_type,
+      </if>
+      <if test="notificationType != null">
+        notification_type,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="editorType != null">
+        #{editorType,jdbcType=TINYINT},
+      </if>
+      <if test="language != null">
+        #{language,jdbcType=TINYINT},
+      </if>
+      <if test="messgeType != null">
+        #{messgeType,jdbcType=TINYINT},
+      </if>
+      <if test="notificationType != null">
+        #{notificationType,jdbcType=TINYINT},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhaoyubo.jianshu.rpc.domain.UserConfigDomain">
+    update user_config
+    <set>
+      <if test="editorType != null">
+        editor_type = #{editorType,jdbcType=TINYINT},
+      </if>
+      <if test="language != null">
+        language = #{language,jdbcType=TINYINT},
+      </if>
+      <if test="messgeType != null">
+        messge_type = #{messgeType,jdbcType=TINYINT},
+      </if>
+      <if test="notificationType != null">
+        notification_type = #{notificationType,jdbcType=TINYINT},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhaoyubo.jianshu.rpc.domain.UserConfigDomain">
+    update user_config
+    set editor_type = #{editorType,jdbcType=TINYINT},
+      language = #{language,jdbcType=TINYINT},
+      messge_type = #{messgeType,jdbcType=TINYINT},
+      notification_type = #{notificationType,jdbcType=TINYINT},
+      user_id = #{userId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

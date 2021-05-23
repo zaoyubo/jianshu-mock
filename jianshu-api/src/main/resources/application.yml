@@ -1,0 +1,17 @@
+project:
+  base-package: com.zhaoyubo.jianshu
+  ver: 1.0.0
+  env: @_project.env@
+  project: jianshu-api
+dubbo:
+  application:
+    # 服务名称，保持唯一
+    name: server-consumer
+  # zookeeper地址，用于从中获取注册的服务
+  registry:
+    address: zookeeper://122.51.69.165:2181
+  # 自定义属性：serviceImpl 版本
+  service:
+    version: 1.0.0
+server:
+  port: 8080

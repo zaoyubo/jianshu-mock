@@ -14,4 +14,6 @@ public interface UserDao {
     int updateByPrimaryKeySelective(UserDomain record);
 
     int updateByPrimaryKey(UserDomain record);
+
+    UserDomain selectByPhone(Long phone);
 }
